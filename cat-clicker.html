@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Cat clicker</title>
+    <script type="text/javascript">
+      var count = 0;
+      function incrementAndUpdate() {
+        count += 1;
+        document.getElementById("count").innerHTML = "count = " + count;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="cat-picture">
+      <a href="javascript:incrementAndUpdate()">
+        <img src="/Users/timofeya/openSource/udacity-javascript-design-patterns/cat-picture.jpeg"/>
+      </a>
+    </div>
+    <div id="count">
+      count = 0
+    </div>
+
+
+  </body>
+</html>
+
