@@ -1,25 +1,41 @@
 <html>
   <head>
     <title>Cat clicker</title>
-    <script type="text/javascript">
-      var count = 0;
-      function incrementAndUpdate() {
-        count += 1;
-        document.getElementById("count").innerHTML = "count = " + count;
-      }
-    </script>
   </head>
   <body>
-    <div id="cat-picture">
-      <a href="javascript:incrementAndUpdate()">
-        <img src="/Users/timofeya/openSource/udacity-javascript-design-patterns/cat-picture.jpeg"/>
-      </a>
-    </div>
-    <div id="count">
-      count = 0
+    <div id="cats">
+      <div id="cat1">
+        <div id="cat1-name"></div>
+        <img id="cat1-img" src="/Users/timofeya/openSource/udacity-javascript-design-patterns/cat1-picture.jpeg"/>
+        <div id="cat1-count"></div>
+      </div>
+      <div id="cat2">
+        <div id="cat2-name"></div>
+        <img id="cat2-img" src="/Users/timofeya/openSource/udacity-javascript-design-patterns/cat2-picture.jpeg"/>
+        <div id="cat2-count"></div>
+      </div>
     </div>
 
+    <script type="text/javascript">
+      var incrementCount = function(count_elem) {
+          var countStr = count_elem.innerHTML;
+          var count = 0;
+          if(countStr && 0 !== countStr.length){
+            count = parseInt(countStr);
+          }
+          count += 1;
+          count_elem.innerHTML = count;
+      };
 
+      document.getElementById("cat1-name").innerHTML = "Snejinka";
+      var cat1_count = document.getElementById("cat1-count");
+      document.getElementById("cat1-img").addEventListener("click", function(){incrementCount(cat1_count)}, false);
+
+      document.getElementById("cat2-name").innerHTML = "Saja";
+      var cat2_count = document.getElementById("cat2-count");
+      document.getElementById("cat2-img").addEventListener("click", function(){incrementCount(cat2_count)}, false);
+
+    </script>
   </body>
 </html>
 
