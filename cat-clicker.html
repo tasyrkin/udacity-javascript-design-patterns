@@ -4,26 +4,59 @@
     <script type="text/javascript">
 
       window.onload = function() {
-        var cat_nums = [1, 2];
-        var cat_names = ["Snejinka", "Saja"];
+        var cat_nums = [1, 2, 3, 4, 5];
+        var cat_names = ["Snejinka", "Saja", "Tishka", "Sumka", "Painted"];
         var cat_imgs = [
           "/Users/timofeya/openSource/udacity-javascript-design-patterns/cat1-picture.jpeg",
-          "/Users/timofeya/openSource/udacity-javascript-design-patterns/cat2-picture.jpeg"
+          "/Users/timofeya/openSource/udacity-javascript-design-patterns/cat2-picture.jpeg",
+          "/Users/timofeya/openSource/udacity-javascript-design-patterns/cat3-picture.jpeg",
+          "/Users/timofeya/openSource/udacity-javascript-design-patterns/cat4-picture.jpeg",
+          "/Users/timofeya/openSource/udacity-javascript-design-patterns/cat5-picture.jpeg"
         ];
+        var cat_elems = [null, null, null, null, null]
+
+        //html element for holding a list
+        var cat_list = document.createElement("ul");
+        document.body.appendChild(cat_list);
+
+        //html element for holding a cat display area
+        var cat_display = document.createElement("div");
+        document.body.appendChild(cat_display);
 
         for(var idx = 0; idx < cat_nums.length; idx++){
-          var cat_elem = document.createElement("div");
-          document.body.appendChild(cat_elem);
-          console.log(document.body);
+          var cat_elem = document.createElement("li");
+          cat_elem.textContent = cat_names[idx];
+          cat_elem.addEventListener(
+            "click",
+            //on clicking on the list element, a cat display area is cleaned and a clicked element is presented
+            (function(curr_idx){
+               return function(){
+                  cat_display.innerHTML = '';
+                  cat_display.appendChild(cat_elems[curr_idx]);
+               };
+             }(idx)),
+            false
+          );
+          cat_list.appendChild(cat_elem);
 
+          cat_elems[idx] = prepareCatElem(idx);
+        }
+
+        //Creates html elements for displaying a cat
+        function prepareCatElem(idx) {
+          var cat_elem = document.createElement("div");
+
+          //a div element holding a cat name
           var cat_name_elem = document.createElement("div");
           cat_name_elem.innerHTML = cat_names[idx];
           cat_elem.appendChild(cat_name_elem);
 
+          //a div element holding a click count
           var cat_count = document.createElement("div");
           cat_count.innerHTML = 'Click count = 0';
           cat_elem.appendChild(cat_count);
 
+          //an img element with a picture and an event listener
           var cat_img_elem = document.createElement("img");
           cat_img_elem.src = cat_imgs[idx];
           cat_img_elem.addEventListener(
@@ -41,6 +74,8 @@
           );
           cat_elem.appendChild(cat_img_elem);
 
+          //a cat_elem holds all the necessary elements for displaying a cat
+          return cat_elem;
         }
       }
     </script>
