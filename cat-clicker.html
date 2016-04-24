@@ -1,41 +1,51 @@
 <html>
   <head>
     <title>Cat clicker</title>
+    <script type="text/javascript">
+
+      window.onload = function() {
+        var cat_nums = [1, 2];
+        var cat_names = ["Snejinka", "Saja"];
+        var cat_imgs = [
+          "/Users/timofeya/openSource/udacity-javascript-design-patterns/cat1-picture.jpeg",
+          "/Users/timofeya/openSource/udacity-javascript-design-patterns/cat2-picture.jpeg"
+        ];
+
+        for(var idx = 0; idx < cat_nums.length; idx++){
+          var cat_elem = document.createElement("div");
+          document.body.appendChild(cat_elem);
+          console.log(document.body);
+
+          var cat_name_elem = document.createElement("div");
+          cat_name_elem.innerHTML = cat_names[idx];
+          cat_elem.appendChild(cat_name_elem);
+
+          var cat_count = document.createElement("div");
+          cat_count.innerHTML = 'Click count = 0';
+          cat_elem.appendChild(cat_count);
+
+          var cat_img_elem = document.createElement("img");
+          cat_img_elem.src = cat_imgs[idx];
+          cat_img_elem.addEventListener(
+            "click",
+            (
+              function(curr_cat_count){
+                var count = 0;
+                return function(){
+                  count++;
+                  curr_cat_count.innerHTML = 'Click count = ' + count;
+                }
+              }(cat_count)
+            ),
+            false
+          );
+          cat_elem.appendChild(cat_img_elem);
+
+        }
+      }
+    </script>
   </head>
   <body>
-    <div id="cats">
-      <div id="cat1">
-        <div id="cat1-name"></div>
-        <img id="cat1-img" src="/Users/timofeya/openSource/udacity-javascript-design-patterns/cat1-picture.jpeg"/>
-        <div id="cat1-count"></div>
-      </div>
-      <div id="cat2">
-        <div id="cat2-name"></div>
-        <img id="cat2-img" src="/Users/timofeya/openSource/udacity-javascript-design-patterns/cat2-picture.jpeg"/>
-        <div id="cat2-count"></div>
-      </div>
-    </div>
-
-    <script type="text/javascript">
-      var incrementCount = function(count_elem) {
-          var countStr = count_elem.innerHTML;
-          var count = 0;
-          if(countStr && 0 !== countStr.length){
-            count = parseInt(countStr);
-          }
-          count += 1;
-          count_elem.innerHTML = count;
-      };
-
-      document.getElementById("cat1-name").innerHTML = "Snejinka";
-      var cat1_count = document.getElementById("cat1-count");
-      document.getElementById("cat1-img").addEventListener("click", function(){incrementCount(cat1_count)}, false);
-
-      document.getElementById("cat2-name").innerHTML = "Saja";
-      var cat2_count = document.getElementById("cat2-count");
-      document.getElementById("cat2-img").addEventListener("click", function(){incrementCount(cat2_count)}, false);
-
-    </script>
   </body>
 </html>
 
